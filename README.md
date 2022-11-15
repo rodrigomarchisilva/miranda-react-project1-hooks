@@ -1,9 +1,9 @@
 <!-- markdownlint-disable MD004 MD007 MD048 MD033-->
-# :atom_symbol: Miranda React Project 1
+# :atom_symbol: Miranda React Project 1 - Hooks
 
 ## :open_book: Content (conteúdo)
 
-- [:atom_symbol: Miranda React Project 1](#atom_symbol-miranda-react-project-1)
+- [:atom_symbol: Miranda React Project 1 - Hooks](#atom_symbol-miranda-react-project-1---hooks)
   - [:open_book: Content (conteúdo)](#open_book-content-conteúdo)
   - [:us: English](#us-english)
     - [:desktop_computer: Deploy link](#desktop_computer-deploy-link)
@@ -42,8 +42,8 @@
 
 ### :information_source: Project info
 
-* **Why I did this project:** It was part of the React section of Luiz Otávio Miranda's course about React and Next.js;
-* **Core Technologies:** React (w/ mainly class components, but also functional components mixed for learning purposes) and CSS;
+* **Why I did this project:** It was part of the React section of Luiz Otávio Miranda's course about React and Next.js, migrating the first project, mostly made with class components, to a version with hooks;
+* **Core Technologies:** React (w/ hooks) and CSS;
 * **Secondary Technologies:** create-react-app and Docker (w/ compose);
 * **Description:** This project has a single page (home) where an API call is made (JSON Placeholder) to return posts with photos. There is also an input where the user can filter the posts by their title.
 
@@ -54,13 +54,13 @@
   **1.** Clone the repository:
 
   ~~~bash
-    git clone git@github.com:rodrigomarchisilva/miranda-react-project1.git
+    git clone git@github.com:rodrigomarchisilva/miranda-react-project1-hooks.git
   ~~~
 
   **2.** Open the project:
 
   ~~~bash
-    cd miranda-react-project1
+    cd miranda-react-project1-hooks
   ~~~
 
   **3.** Make sure you have VSCode installed and running:
@@ -108,13 +108,13 @@
   **3.** Build the image:
 
   ~~~bash
-    docker build -t miranda-react-project1 .
+    docker build -t miranda-react-project1-hooks .
   ~~~
 
   **4.** Run the container:
 
   ~~~bash
-    docker run -v ${PWD}:/app -v /app/node_modules -p 3000:3000 --rm miranda-react-project1
+    docker run -v ${PWD}:/app -v /app/node_modules -p 3000:3000 --rm miranda-react-project1-hooks
   ~~~
 
 ### :whale: How to run it through docker-compose
@@ -177,8 +177,8 @@
 
 ### :information_source: Informações do projeto
 
-* **Por que eu fiz esse projeto:** Foi parte da seção de React do curso de React e Next.js do Luiz Otávio Miranda;
-* **Tecnologias principais:** React (com componentes de classe, mas também componentes funcionais misturados para fins de aprendizado) e CSS;
+* **Por que eu fiz esse projeto:** Foi parte da seção de React do curso de React e Next.js do Luiz Otávio Miranda, migrando o primeiro projeto, feito principalmente com componentes de classe, para uma versão com hooks;
+* **Tecnologias principais:** React (com hooks) e CSS;
 * **Tecnologias secundárias:** create-react-app e Docker (com compose);
 * **Descrição:** Esse projeto tem uma única página (home) onde é feita uma chamada à API (JSON Placeholder) para retornar posts com fotos. Também há um input onde o usuário pode filtrar os posts pelo título.
 
@@ -189,13 +189,13 @@
   **1.** Clone o repositório:
 
   ~~~bash
-    git clone git@github.com:rodrigomarchisilva/miranda-react-project1.git
+    git clone git@github.com:rodrigomarchisilva/miranda-react-project1-hooks.git
   ~~~
 
   **2.** Abra o projeto:
 
   ~~~bash
-    cd miranda-react-project1
+    cd miranda-react-project1-hooks
   ~~~
 
   **3.** Certifique-se de ter o VSCode instalado e rodando:
@@ -243,13 +243,13 @@
   **3.** Faça o build da imagem:
 
   ~~~bash
-    docker build -t miranda-react-project1 .
+    docker build -t miranda-react-project1-hooks .
   ~~~
 
   **4.** Rode o container:
 
   ~~~bash
-    docker run -v ${PWD}:/app -v /app/node_modules -p 3000:3000 --rm miranda-react-project1
+    docker run -v ${PWD}:/app -v /app/node_modules -p 3000:3000 --rm miranda-react-project1-hooks
   ~~~
 
 ### :whale: Como rodar através do docker-compose

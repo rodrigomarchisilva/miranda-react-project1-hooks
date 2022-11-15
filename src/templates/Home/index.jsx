@@ -1,76 +1,65 @@
 import './style.css';
-import { Component } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Posts } from '../../components/Posts';
 import { fetchPosts } from '../../utils/fetchPosts';
 import { Button } from '../../components/Button';
 import { SearchInput } from '../../components/SearchInput';
 
-export class Home extends Component {
-  state = {
-    posts: [],
-    allPosts: [],
-    page: 0,
-    postsPerPage: 3,
-    searchValue: '',
-  };
+export const Home = () => {
+  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [page, setPage] = useState(0);
+  const [postsPerPage] = useState(3);
+  const [searchValue, setSearchValue] = useState('');
 
-  async componentDidMount() {
-    await this.setPosts();
-  }
-
-  setPosts = async() => {
-    const { page, postsPerPage } = this.state;
+  const loadPosts = useCallback(async() => {
     const posts = await fetchPosts();
-    this.setState({
-      posts: posts.slice(page, postsPerPage),
-      allPosts: posts,
-    });
-  }
+    setAllPosts(posts);
+    setPosts(posts.slice(0, postsPerPage));
+  }, [postsPerPage]);
 
-  addPosts = () => {
-    const { page, postsPerPage, allPosts, posts } = this.state;
+  useEffect(() => { loadPosts(); }, [loadPosts]);
+
+  const addPosts = () => {
     const nextPage = page + postsPerPage;
     const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
     posts.push(...nextPosts);
-    this.setState({ posts, page: nextPage });
-  }
+    setPosts(posts);
+    setPage(nextPage);
+  };
 
-  handleSearch = (e) => {
+ const handleSearch = (e) => {
     const { value } = e.target;
-    this.setState({ searchValue: value });
+    setSearchValue(value);
   }
 
-  filterPosts = (post) => (
+  const filterPosts = (post) => (
     post.title.toLowerCase().includes(this.state.searchValue.toLowerCase())
   );
 
-  render() {
-    const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
-    const { addPosts, handleSearch, filterPosts } = this;
-    const noMorePosts = page + postsPerPage >= allPosts.length;
-    const filteredPosts = searchValue ? allPosts.filter(filterPosts) : posts;
+  const noMorePosts = page + postsPerPage >= allPosts.length;
+  const filteredPosts = searchValue ? allPosts.filter(filterPosts) : posts;
+  
+  if (!posts) { return <div>Loading...</div>; }
 
-    if (!posts) { return <div>Loading...</div>; }
-
-    return (
-      <section className="container" data-testid="container">
-        { searchValue && <h1>Search value: { searchValue }</h1> }
-        <SearchInput value={ searchValue } onChange={ handleSearch } />
-        {
-          !filteredPosts.length
-            ? <div>{ 'No posts found =(' }</div>
-            : (
-              <>
-                <Posts posts={ filteredPosts } />
-                <Button
-                  text="Show more posts"
-                  onClick={ addPosts }
-                  disabled={ noMorePosts }
-                />
-              </>
-            )
-        }
-      </section>
-    );
-  }
+  return (
+    <section className="container" data-testid="container">
+      { searchValue && <h1>Search value: { searchValue }</h1> }
+      <SearchInput value={ searchValue } onChange={ handleSearch } />
+      {
+        !filteredPosts.length
+          ? <div>{ 'No posts found =(' }</div>
+          : (
+            <>
+              <Posts posts={ filteredPosts } />
+              <Button
+                text="Show more posts"
+                onClick={ addPosts }
+                disabled={ noMorePosts }
+              />
+            </>
+          )
+      }
+    </section>
+  );
 }
